@@ -1,0 +1,21 @@
+{% load static %}
+<!--DOCTYPE html-->
+<html lang="en">
+	<head>
+		<title>Juego de combinaciones</title>
+		<link rel="stylesheet" href="{% static 'style.css' %}" />
+		<link rel="stylesheet" href="{% static 'result.css' %}" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<div id="{{state}}" class="result_container">
+			<h1>{{message}}</h1>
+			<img src="{% static image %}" alt="image"/>
+			<form method="POST" action="{% url 'numero_combinatorio:index' %}">
+				{% csrf_token %}
+				<button>Voler a jugar</button>
+			</form>
+		</div>
+	</body>
+	<script src="{% static 'result.js' %}"></script>
+</html>

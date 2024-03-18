@@ -1,0 +1,29 @@
+{% load static %}
+<!--DOCTYPE html-->
+<html lang="en">
+	<head>
+		<title>Juego de combinaciones</title>
+		<link rel="stylesheet" href="{% static 'style.css' %}" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<form action="{% url 'numero_combinatorio:index' %}" method="POST" id="amount_form">
+			{% csrf_token %}
+			<label>Ingrese la cantidad de digitos con las que jugar <b>Rango (2-5)</b>:</label><br><br>
+			<input type="number" id="amount_inp" min=2 max=5 name="amount" value={{amount_letters}} />
+			<button id="amount_btn">Cargar nueva partida</button>
+			<p>Existen {{bc}} parejas distíntas para {{amount_letters}} dígitos.</p>
+		</form>
+		<div id="container">
+			<form id="result_form" action="{% url 'numero_combinatorio:result' %}" method="POST">
+			{% csrf_token %}
+			<input type='hidden' id="correct_ans" name="correct_ans" value="{{correct_answer}}" />
+			{% for el in combinations %}
+			<div class="result_radio_div"><label>{{el}}<input type="radio" required name="answer_attempt" class="result_radio" /></label></div>
+			{% endfor %}
+			<button>Answer</button>
+			</form>
+		</div>
+		<script src="{% static 'main.js' %}"></script>
+	</body>
+</html>
